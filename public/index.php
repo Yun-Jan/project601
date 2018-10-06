@@ -5,13 +5,21 @@
  * Date: 10/6/18
  * Time: 3:48 PM
  */
-main:: start();
+main:: start("example.csv");
 
 class main{
 
-    static public function start()
+    static public function start($filename)
     {
-        $file = fopen("example.csv", "r");
+        $records= csv::getRecords($filename);
+        print_r($records);
+
+    }
+}
+class csv {
+    static public function getRecords($filename){
+
+        $file = fopen($filename, "r");
 
         while (!feof($file)) {
 
@@ -21,6 +29,6 @@ class main{
         }
 
         fclose($file);
-        print_r($records);
+        return $records;
     }
 }
