@@ -12,8 +12,18 @@ class main{
     static public function start($filename)
     {
         $records= csv::getRecords($filename);
+        $table=html::generateTable($records);
 
+    }
+}
 
+class html{
+    public static function generateTable($records)
+    {
+        foreach ($records as $record) {
+            $array = $record->returnArray();
+            print_r($array);
+        }
     }
 }
 class csv {
@@ -50,7 +60,11 @@ class record{
         foreach ($record as $property=> $value){
             $this->createProperty($property,$value);
         }
-        print_r($this);
+    }
+
+    public function returnArray() {
+        $array=(array) $this;
+        return $array;
     }
 
     public function createProperty($name='first', $value='Keith'){
